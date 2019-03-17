@@ -2,14 +2,18 @@ package br.com.estacionamento.mvc.model.persistent_object;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
+
 @Entity
-@Table(name="TB_CIDADE")
+@Table(name = "TB_CIDADE")
 public class POCidade {
 
 //	+------------------+-------------------------+------+-----+---------+----------------+
@@ -23,15 +27,19 @@ public class POCidade {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "TB_CIDADE_ID",nullable = false, length = 11)
+	@Column(name = "TB_CIDADE_ID", nullable = false, length = 11)
 	private int idCidade;
-	
-	@Column(name = "TB_CIDADE_NOME", nullable= false,length = 50)
+
+	@Column(name = "TB_CIDADE_NOME", nullable = false, length = 50)
 	private String nomeCidade;
-	//private EnumStatus 
-	
+	// private EnumStatus
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "TB_CIDADE_STATUS", nullable = false)
+	private EnumStatus statusCidade;
+
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "TB_ESTADO_ID",nullable = false)
 	private POEstado idEstado;
 
 	public int getIdCidade() {
@@ -57,10 +65,5 @@ public class POCidade {
 	public void setIdEstado(POEstado idEstado) {
 		this.idEstado = idEstado;
 	}
-	
-	
-	
-	
-	
-	
+
 }
