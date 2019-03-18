@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
 @Entity
@@ -29,10 +31,12 @@ public class POMensalistaVeiculo {
 	@Id
 	@GeneratedValue
 	@Column(name = "TB_MENSALISTA_VEICULO_ID", nullable = false, length = 11)
-	private int idmensalistaV;
+	private int idMensalistaV;
 	
-	@Column(name = "TB_MENSALISTA_VEICULO_PROPRIETARIO",nullable = false,length = 1)
-	private int proprietarioV;
+	
+	@Column(name = "TB_MENSALISTA_VEICULO_PROPRIETARIO",nullable = false)
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean proprietarioV;
 	
 	@ManyToOne
 	@JoinColumn(name = "TB_MENSALISTA_ID",nullable = false)
@@ -46,19 +50,21 @@ public class POMensalistaVeiculo {
 	@Column(name = "TB_MENSALISTA_VEICULO_STATUS")
 	private EnumStatus statusMensalistaV;
 
-	public int getIdmensalistaV() {
-		return idmensalistaV;
+	public int getIdMensalistaV() {
+		return idMensalistaV;
 	}
 
-	public void setIdmensalistaV(int idmensalistaV) {
-		this.idmensalistaV = idmensalistaV;
+	public void setIdMensalistaV(int idmensalistaV) {
+		this.idMensalistaV = idmensalistaV;
 	}
 
-	public int getProprietarioV() {
+	
+
+	public boolean isProprietarioV() {
 		return proprietarioV;
 	}
 
-	public void setProprietarioV(int proprietarioV) {
+	public void setProprietarioV(boolean proprietarioV) {
 		this.proprietarioV = proprietarioV;
 	}
 

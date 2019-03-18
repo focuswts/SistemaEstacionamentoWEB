@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
@@ -50,7 +51,7 @@ public class POEndereco {
 	@Column(name = "TB_ENDERECO_STATUS", nullable = false)
 	private EnumStatus statusEndereco;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "TB_CIDADE_ID", nullable = false)
 	private POCidade idCidade;
 

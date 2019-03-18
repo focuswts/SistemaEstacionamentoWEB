@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
+
 public class Teste {
 
 	public static void main(String[] args) {
@@ -24,12 +26,13 @@ public class Teste {
 
 		em.getTransaction().begin(); // Inicia A Transação Com O Banco De Dados
 		// em.persist(e); //Faz A Inserção Do Objeto No DB
-		e = em.find(POEstado.class, e.getIdEstado()); //Faz A busca no DB
+	//	e = em.find(POEstado.class, e.getIdEstado()); //Faz A busca no DB
 
 		// em.remove(e); // Remove No DB
 
 		
 		e.setNomeEstado("Paraná");
+		e.setStatusEstado(EnumStatus.ATIVO);
 		em.merge(e);//Efetua O Insert Se não Possuir O Valor,Se Possuir Ele Atualiza
 		
 		em.getTransaction().commit(); // Efetua A Operação

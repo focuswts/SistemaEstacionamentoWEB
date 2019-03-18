@@ -34,4 +34,30 @@ public class POVaga {
 	@Column(name = "TB_VAGA_STATUS", nullable = false)
 	private EnumStatus statusVaga;
 
+	public int getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(int idVaga) {
+		this.idVaga = idVaga;
+	}
+
+	public String getDescVaga() {
+		return descVaga;
+	}
+
+	public void setDescVaga(String descVaga) {
+		this.descVaga = descVaga;
+	}
+
+	public EnumStatus getStatusVaga() {
+		return statusVaga;
+	}
+
+	public void setStatusVaga(EnumStatus statusVaga) {
+		this.statusVaga = statusVaga;
+	}
+	
+	
+
 }
