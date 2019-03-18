@@ -9,7 +9,7 @@ import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 public class Teste3 {
 
 	public static void main(String[] args) {
-		
+
 		try {
 
 			CRUDEstado estadoCrud = new CRUDEstado();
@@ -19,8 +19,6 @@ public class Teste3 {
 
 			ArrayList<Object> estadoResult = estadoCrud.list("SELECT o FROM POEstado o WHERE o.idEstado = 1");
 
-			
-			
 			POEstado estado = (POEstado) estadoResult.get(0);
 			System.out.println(estado.getNomeEstado());
 //			POCidade cidade = new POCidade();

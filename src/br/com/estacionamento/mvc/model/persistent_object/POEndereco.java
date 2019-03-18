@@ -55,7 +55,7 @@ public class POEndereco {
 	@JoinColumn(name = "TB_CIDADE_ID", nullable = false)
 	private POCidade idCidade;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "TB_MENSALISTA_ID", nullable = false)
 	private POMensalista idMensalista;
 
