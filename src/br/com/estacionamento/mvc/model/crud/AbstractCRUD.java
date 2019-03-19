@@ -28,7 +28,7 @@ public abstract class AbstractCRUD {
 
 	public abstract void delete(Object o);
 
-	public abstract ArrayList<Object> list(String statement);
+	public abstract ArrayList<?> list(String statement);
 	
 	
 }

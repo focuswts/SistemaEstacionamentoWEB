@@ -42,7 +42,7 @@ public class CRUDEstado extends AbstractCRUD {
 	}
 
 	@Override
-	public ArrayList<Object> list(String statement) {
+	public ArrayList<POEstado> list(String statement) {
 
 		if (statement == null || statement.equals("")) {
 			statement = "SELECT o FROM POEstado o";
@@ -50,7 +50,7 @@ public class CRUDEstado extends AbstractCRUD {
 
 		super.open();
 		Query query = super.entityManager.createQuery(statement);
-		ArrayList<Object> set = (ArrayList<Object>) query.getResultList();
+		ArrayList<POEstado> set = (ArrayList<POEstado>) query.getResultList();
 		super.close();
 		return set;
 	}
