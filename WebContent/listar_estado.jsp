@@ -15,12 +15,13 @@
 	<div id="form">
 		<form method="post" action="AtualizarEstadoServlet">
 			<input type = "text" disabled id="tf_id"/>
-			<input type="text" placeholder="Estado" id="tf_estado" /> <input
-				type="text" placeholder="uf" id="tf_uf" /> <select
-				name="slc_status">
+			<input type="text" placeholder="Estado" id="tf_estado" /> 
+			<input type="text" placeholder="uf" id="tf_uf" /> 
+			<select id = "slc_status_update">
 				<option value=0>Ativo</option>
 				<option value=1>Inativo</option>
-			</select> <input type="button" value="Salvar" id="btn-salvar" />
+			</select> 
+			<input type="button" value="Salvar" id="btn-salvar" />
 		</form>
 	</div>
 </body>
