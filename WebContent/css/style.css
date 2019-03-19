@@ -1,0 +1,18 @@
+#tabela {
+	border: 1px solid black;
+	border-collapse: collapse;
+width: 100%;
+}
+
+#tabelaBody  tr,th,td {
+	border:1px solid black;
+}
+
+#tabelaBody td{
+	
+text-align:center;	
+}
+
+#form form{
+	width: 100%;
+}
