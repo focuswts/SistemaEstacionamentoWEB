@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
 @Entity
@@ -31,19 +34,19 @@ public class POModelo {
 	@Column(name = "TB_MODELO_ID", nullable = false, length = 11)
 	private int idModelo;
 
-	@Column(name = "TB_MODELO_DESC",nullable = false,length = 50)
+	@Column(name = "TB_MODELO_DESC", nullable = false, length = 50)
 	private String descModelo;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TB_MODELO_STATUS",nullable = false)
+	@Column(name = "TB_MODELO_STATUS", nullable = false)
 	private EnumStatus statusModelo;
 
 	@ManyToOne
-	@JoinColumn(name = "TB_TIPO_VEICULO_ID",nullable = false)
+	@JoinColumn(name = "TB_TIPO_VEICULO_ID", nullable = false)
 	private POTipoVeiculo idTipoV;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "TB_MARCA_ID",nullable = false)
+	@JoinColumn(name = "TB_MARCA_ID", nullable = false)
 	private POMarca idMarca;
 
 	public int getIdModelo() {
@@ -86,6 +89,15 @@ public class POModelo {
 		this.idMarca = idMarca;
 	}
 
-	
-	
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("idModelo", this.idModelo);
+		json.put("descModelo", this.descModelo);
+		json.put("statusModelo", this.statusModelo.getStatus());
+		json.put("idTipoV", this.idTipoV);
+		json.put("idMarca", this.idMarca);
+
+		return json;
+	}
+
 }
