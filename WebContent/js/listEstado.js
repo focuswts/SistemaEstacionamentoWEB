@@ -1,16 +1,24 @@
 $(document).ready(
+
 		function() {
+			// Declara O Metodo Servlet
 
-			$.ajax({
-				url : 'ListarEstadoServlet',
-				type : 'POST',
-				success : function(response) {
-					// alert(JSON.stringify(response));
-					render(response);
+			fillTable();
 
-				}
-			})
+			function fillTable() {
+				clearTable();
+				$.ajax({
+					url : 'ListarEstadoServlet',
+					type : 'POST',
+					success : function(response) {
+						// alert(JSON.stringify(response));
+						render(response);
 
+					}
+				})
+			}
+
+			// Renderiza A Table Com Os Estados
 			function render(data) {
 				var tabela = $('#set').append(
 						$('<table></table>').attr("id", "tabela"));
@@ -36,6 +44,7 @@ $(document).ready(
 
 					var row4 = $("<td>" + value.statusEstado + "</td>");
 
+					// Efetua A Funcao Ao Clicar No Botao btn-update
 					var button = $('<button>Modificar</button>').attr("id",
 							"btn-update-" + index).click({
 						p1 : this
@@ -57,10 +66,21 @@ $(document).ready(
 				})
 
 			}
+			;
 
+			// Efetua A Funcao Ao Clicar no Botao btn-update-db
+			$(function() {
+				$("#btn-update-db").click(function() {
+			
+					callUpdateServlet(getInputData());
+				
+				});
+			});
+
+			// Define Os Valores Do Input Para Update
 			function setInputData(event) {
 
-				console.log($('#row'));
+				// console.log($('#row'));
 
 				var row = "#" + $(this).parent().parent().attr('id');
 
@@ -71,11 +91,6 @@ $(document).ready(
 				var siglaEstado = $(row).find("td:eq(2)").text();
 
 				var statusEstado = $(row).find("td:eq(3)").text();
-
-				// event.data.p1 =
-				// $(row).find("td:eq(3)").children().text();
-
-				// alert($(this).parent().parent().attr('id'));
 
 				clearFields();
 				$('#tf_id').val(idEstado);
@@ -90,20 +105,75 @@ $(document).ready(
 					// Define O Valor Do Option Para False Para Depois Definir
 					// Um Valor Como TRUE
 					$(v).attr('selected', false);
-					//Efetua A Comparação Para Ver Se O Valor Da Table é igual Ao valor do OPTION
-					if ($(v).text().toLowerCase() === statusEstado 
+					// Efetua A Comparação Para Ver Se O Valor Da Table é igual
+					// Ao valor do OPTION
+					if ($(v).text().toLowerCase() === statusEstado
 							.toLowerCase()) {
 						$(v).attr('selected', true);
 					}
 				});
 
 			}
+			;
 
+			function clearTable() {
+				$('#tabela thead').remove();
+				$('#tabela tbody').remove();
+			}
+
+			// Limpa Os Campos Input
 			function clearFields() {
 				$('#tf_id').val(null);
 				$('#tf_estado').val(null);
 				$('#tf_uf').val(null);
 				$('#slc_status').val(null);
+			}
+			;
+
+			// Pega Os Valores Dos Campos Input
+			function getInputData() {
+
+				var idEstado = $('#tf_id').val();
+				// alert(idEstado);
+
+				var nomeEstado = $('#tf_estado').val();
+				// alert(nomeEstado);
+
+				var siglaEstado = $('#tf_uf').val();
+				// alert(siglaEstado);
+
+				// Pega O Valor Do Option Selecionado
+				var statusEstado = $('#slc_status_update').attr('selected',
+						true).val();
+				// alert(statusEstado);
+
+				var estado = {
+					"idEstado" : idEstado,
+					"nomeEstado" : nomeEstado,
+					"siglaEstado" : siglaEstado,
+					"statusEstado" : statusEstado
+				};
+				// console.log(estado.idEstado);
+				return estado;
+			}
+			;
+
+			function callUpdateServlet(estado) {
+				$.ajax({
+					url : 'AtualizarEstadoServlet',
+					type : 'POST',
+					data : {
+						'id-estado' : estado.idEstado,
+						'nome-estado' : estado.nomeEstado,
+						'sigla-estado' : estado.siglaEstado,
+						'status-estado' : estado.statusEstado
+					},
+					success : function(response) {
+						alert("Atualizado Com Sucesso");
+						clearFields();
+						fillTable();
+					}
+				})
 			}
 
 		});

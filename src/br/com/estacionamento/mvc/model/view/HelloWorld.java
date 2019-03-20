@@ -26,19 +26,21 @@ public class HelloWorld extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		String nome = request.getParameter("tf_estado");
-		String uf = request.getParameter("tf_uf");
-
+		String nome = request.getParameter("nome-estado"); //Nome Do Parametro Do JS
+		String uf = request.getParameter("sigla-estado");
 		out.println("<html>");
 		out.println("<body>");
 
+		System.out.println(request.getParameter("status-estado"));
+		System.out.println(request.getParameter("nome-estado"));
+		
 		try {
 			POEstado e = new POEstado();
 			CRUDEstado crudEstado = new CRUDEstado();
 			e.setNomeEstado(nome);
 			e.setSiglaEstado(uf);
 
-			switch (request.getParameter("slc_status")) {
+			switch (request.getParameter("status-estado")) {
 			case "0":
 				e.setStatusEstado(EnumStatus.ATIVO);
 				break;
@@ -66,11 +68,6 @@ public class HelloWorld extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 	}

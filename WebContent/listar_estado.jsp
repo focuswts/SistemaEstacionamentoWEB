@@ -14,14 +14,14 @@
 	<div id="set"></div>
 	<div id="form">
 		<form method="post" action="AtualizarEstadoServlet">
-			<input type = "text" disabled id="tf_id"/>
-			<input type="text" placeholder="Estado" id="tf_estado" /> 
-			<input type="text" placeholder="uf" id="tf_uf" /> 
-			<select id = "slc_status_update">
+			<input type = "text" disabled id="tf_id" name="tf_id"/>
+			<input type="text" placeholder="Estado" id="tf_estado" name="tf_estado"/> 
+			<input type="text" placeholder="uf" id="tf_uf" name="tf_uf"/> 
+			<select id = "slc_status_update" name="slc_status_update">
 				<option value=0>Ativo</option>
 				<option value=1>Inativo</option>
 			</select> 
-			<input type="button" value="Salvar" id="btn-salvar" />
+			<input type="button" value="Atualizar Valor" id="btn-update-db" />
 		</form>
 	</div>
 </body>

@@ -17,10 +17,10 @@
      </form>
      -->
 
-	<form method="post" action="HelloWorld">
-		<input type="text" placeholder="Estado" id="tf_estado" /> 
-		<input type="text" placeholder="uf" id="tf_uf" /> <select
-			name="slc_status">
+	<form method="POST" action="HelloWorld">
+		<input type="text" placeholder="Estado" id="tf_estado" name="tf_estado"/> 
+		<input type="text" placeholder="uf" id="tf_uf" /> 
+		<select	name="slc_status" id="slc_status">
 			<option value=0>Ativo</option>
 			<option value=1>Inativo</option>
 		</select>
