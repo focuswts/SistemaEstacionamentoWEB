@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
 @Entity
@@ -34,7 +37,7 @@ public class POUsuario {
 	@Column(name = "TB_USUARIO_SENHA", nullable = false, length = 10)
 	private String senhaUsuario;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "TB_USUARIO_STATUS" , nullable = false)
 	private EnumStatus statusUsuario;
 
@@ -70,4 +73,14 @@ public class POUsuario {
 		this.statusUsuario = statusUsuario;
 	}
 
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("idUsuario", this.idUsuario);
+		json.put("nomeUsuario", this.nomeUsuario);
+		json.put("senhaUsuario", this.senhaUsuario);
+		json.put("statusUsuario", this.statusUsuario.getStatus());
+
+		return json;
+	}
+	
 }

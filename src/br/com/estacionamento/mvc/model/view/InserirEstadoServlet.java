@@ -24,24 +24,25 @@ public class InserirEstadoServlet extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 	throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome-estado"); //Nome Do Parametro Do JS
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String nome = request.getParameter("nome-estado"); // Nome Do Parametro Do JS
 		String uf = request.getParameter("sigla-estado");
-		
-	
+
 		System.out.println(request.getParameter("nome-estado"));
-		
+
 		try {
 			POEstado estado = new POEstado();
 			CRUDEstado crudEstado = new CRUDEstado();
 			estado.setNomeEstado(nome);
 			estado.setSiglaEstado(uf);
 
-			//Define O Valor DO EnumStatus
+			// Define O Valor DO EnumStatus
 			switch (request.getParameter("status-estado")) {
 			case "0":
 				estado.setStatusEstado(EnumStatus.ATIVO);
@@ -54,10 +55,9 @@ public class InserirEstadoServlet extends HttpServlet {
 			crudEstado.insert(estado);
 
 			if (estado.getIdEstado() > 0) {
-				//response.sendRedirect(request.getContextPath() + "/sucesso.jsp");
-			System.out.println("Estado Inserido Com Sucesso!");
+				// response.sendRedirect(request.getContextPath() + "/sucesso.jsp");
+				System.out.println("Estado Inserido Com Sucesso!");
 			} else {
-				
 				response.sendRedirect(request.getContextPath() + "/erro.jsp");
 			}
 
