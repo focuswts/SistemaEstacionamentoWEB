@@ -45,13 +45,19 @@ $(document).ready(
 					var row4 = $("<td>" + value.statusEstado + "</td>");
 
 					// Efetua A Funcao Ao Clicar No Botao btn-update
-					var button = $('<button>Modificar</button>').attr("id",
-							"btn-update-" + index).click({
+					var buttonUpdate = $('<button>Modificar</button>').attr(
+							"id", "btn-update-" + index).click({
 						p1 : this
 					}, setInputData);
 
+					var buttonRemove = $('<button>Remover</button>').attr("id",
+							"btn-remove-" + index).click({
+						p1 : this
+					}, callRemoveServlet);
+
 					var row5 = $("<td></td>");
-					row5.append(button);
+					row5.append(buttonUpdate);
+					row5.append(buttonRemove);
 
 					td.append(row1);
 					td.append(row2);
@@ -71,9 +77,9 @@ $(document).ready(
 			// Efetua A Funcao Ao Clicar no Botao btn-update-db
 			$(function() {
 				$("#btn-update-db").click(function() {
-			
+
 					callUpdateServlet(getInputData());
-				
+
 				});
 			});
 
@@ -116,6 +122,7 @@ $(document).ready(
 			}
 			;
 
+			// Limpa A Tabela
 			function clearTable() {
 				$('#tabela thead').remove();
 				$('#tabela tbody').remove();
@@ -158,6 +165,7 @@ $(document).ready(
 			}
 			;
 
+			// Chama O Servlet Para Update
 			function callUpdateServlet(estado) {
 				$.ajax({
 					url : 'AtualizarEstadoServlet',
@@ -174,6 +182,33 @@ $(document).ready(
 						fillTable();
 					}
 				})
+			}
+			;
+
+			// Chama O Servlet Para Remoção
+			function callRemoveServlet(event) {
+				var row = "#" + $(this).parent().parent().attr('id');
+				var idEstado = $(row).find("td:eq(0)").text();
+				var nomeEstado = $(row).find("td:eq(1)").text();
+
+				var confirmacao = confirm("Deseja Excluir O Estado: "
+						+ nomeEstado + " ?");
+
+				if (confirmacao == true) {
+					$.ajax({
+						url : 'RemoverEstadoServlet',
+						type : 'POST',
+						data : {
+							'id-estado' : idEstado,
+						},
+						success : function(response) {
+							alert("Removido Com Sucesso");
+							clearFields();
+							fillTable();
+						}
+					})
+				}
+
 			}
 
 		});
