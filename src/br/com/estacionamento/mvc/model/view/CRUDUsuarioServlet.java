@@ -2,6 +2,7 @@ package br.com.estacionamento.mvc.model.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import br.com.estacionamento.mvc.model.crud.CRUDUsuario;
 import br.com.estacionamento.mvc.model.persistent_object.POUsuario;
@@ -54,6 +56,10 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			removeUser(request);
 			break;
 
+		case "authentication":
+			System.out.println("CRUD Authentication Operation");
+			loginAuthentication(request, response);
+			break;
 		}
 
 	}
@@ -161,7 +167,6 @@ public class CRUDUsuarioServlet extends HttpServlet {
 
 	private void removeUser(HttpServletRequest request) {
 		int idUsuario = Integer.valueOf(request.getParameter("id-usuario"));
-		String nomeUsuario = request.getParameter("nome-usuario");
 
 		try {
 			POUsuario usuario = new POUsuario();
@@ -173,6 +178,42 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			System.out.println("Usuário Removido Com Sucesso");
 		} catch (Exception e) {
 			System.out.println("Erro Ao Remover Usuário");
+			e.printStackTrace();
+		}
+
+	}
+
+	private void loginAuthentication(HttpServletRequest request, HttpServletResponse response) {
+		String username = request.getParameter("user");
+		String password = request.getParameter("password");
+
+		try {
+			POUsuario usuario = new POUsuario();
+			CRUDUsuario crud = new CRUDUsuario();
+
+			usuario.setNomeUsuario(username);
+			usuario.setSenhaUsuario(password);
+
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			String message = "";
+
+			if (crud.login(usuario) == true) {
+				System.out.println("Login Efetuado!");
+				message = "Login Efetuado!";
+				response.getWriter().write(message);
+				// response.getWriter().write("Login Efetuado Com Sucesso");
+				// response.sendRedirect(request.getContextPath() + "/sucesso.jsp");
+			} else if (crud.login(usuario) == false) {
+				System.out.println("Login E/Ou Senha Incorretos!");
+				message = "Login E/Ou Senha Incorretos!";
+				response.getWriter().write(message);
+//				response.getWriter().write("Login E/Ou Senha Incorretos!");
+				// response.sendRedirect(request.getContextPath() + "/erro.jsp");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Erro Ao Efetuar Autenticação Do Usuário");
 			e.printStackTrace();
 		}
 

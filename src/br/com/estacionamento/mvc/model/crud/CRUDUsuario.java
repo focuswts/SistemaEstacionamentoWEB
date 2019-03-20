@@ -6,8 +6,7 @@ import javax.persistence.Query;
 
 import br.com.estacionamento.mvc.model.persistent_object.POUsuario;
 
-public class CRUDUsuario extends AbstractCRUD{
-
+public class CRUDUsuario extends AbstractCRUD {
 
 	@Override
 	public void insert(Object o) {
@@ -55,5 +54,30 @@ public class CRUDUsuario extends AbstractCRUD{
 		super.close();
 		return set;
 	}
-	
+
+	public boolean login(POUsuario usuario) {
+		boolean loginSuccess = false;
+		try {
+
+			String statement = "SELECT o FROM POUsuario o WHERE o.nomeUsuario = :user AND o.senhaUsuario = :password";
+			super.open();
+			Query query = super.entityManager.createQuery(statement);
+			query.setParameter("user", usuario.getNomeUsuario());
+			query.setParameter("password", usuario.getSenhaUsuario());
+
+			ArrayList<POUsuario> set = (ArrayList<POUsuario>) query.getResultList();
+			super.close();
+			if (set.size() > 0) {
+				loginSuccess = true;
+			} else {
+				loginSuccess = false;
+			}
+
+		} catch (Exception e) {
+			System.out.println("Erro Ao Efetuar Login");
+			e.printStackTrace();
+		}
+		return loginSuccess;
+	}
+
 }
