@@ -13,7 +13,7 @@
 
 	<div id="set"></div>
 	<div id="form">
-		<form method="post" action="AtualizarEstadoServlet">
+		<form method="post">
 			<input type = "text" disabled id="tf_id" name="tf_id"/>
 			<input type="text" placeholder="Estado" id="tf_estado" name="tf_estado"/> 
 			<input type="text" placeholder="uf" id="tf_uf" name="tf_uf"/> 
@@ -21,7 +21,8 @@
 				<option value=0>Ativo</option>
 				<option value=1>Inativo</option>
 			</select> 
-			<input type="button" value="Atualizar Valor" id="btn-update-db" />
+			<input type="button" value="Inserir Estado" id="btn-update-db" />
+			<input type="button" value="Limpar Campos" id="btn-clear" />
 		</form>
 	</div>
 </body>

@@ -27,7 +27,6 @@ public class AtualizarEstadoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//	System.out.println("Inserindo O Estado " + request.getParameter("id-estado"));
-		PrintWriter out = response.getWriter();
 		int id = Integer.valueOf(request.getParameter("id-estado"));
 		String nome = request.getParameter("nome-estado"); //Nome Do Parametro Do JS
 		String uf = request.getParameter("sigla-estado");

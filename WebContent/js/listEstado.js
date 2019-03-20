@@ -77,9 +77,14 @@ $(document).ready(
 			// Efetua A Funcao Ao Clicar no Botao btn-update-db
 			$(function() {
 				$("#btn-update-db").click(function() {
+					doOperation();
+				});
+			});
 
-					callUpdateServlet(getInputData());
-
+			// Efetua A Funcao Limpar Campos Ao Clicar No Botao LimparCampos
+			$(function() {
+				$("#btn-clear").click(function() {
+					clearFields();
 				});
 			});
 
@@ -87,7 +92,7 @@ $(document).ready(
 			function setInputData(event) {
 
 				// console.log($('#row'));
-
+				clearFields();
 				var row = "#" + $(this).parent().parent().attr('id');
 
 				var idEstado = $(row).find("td:eq(0)").text();
@@ -98,11 +103,17 @@ $(document).ready(
 
 				var statusEstado = $(row).find("td:eq(3)").text();
 
-				clearFields();
+				console.log("Status: " + statusEstado);
+
 				$('#tf_id').val(idEstado);
 				$('#tf_estado').val(nomeEstado);
 				$('#tf_uf').val(siglaEstado);
-				$('#slc_status>option').val(1);
+
+				if (statusEstado.toLowerCase() === "ativo") {
+					$('#slc_status_update').val(0);
+				} else if (statusEstado.toLowerCase() === "inativo") {
+					$('#slc_status_update').val(1);
+				}
 
 				// Acessa O Componente Filho Do Select(OPTION)
 				// roda a funcao para separar o valor(value) do conteudo do
@@ -111,6 +122,7 @@ $(document).ready(
 					// Define O Valor Do Option Para False Para Depois Definir
 					// Um Valor Como TRUE
 					$(v).attr('selected', false);
+
 					// Efetua A Comparação Para Ver Se O Valor Da Table é igual
 					// Ao valor do OPTION
 					if ($(v).text().toLowerCase() === statusEstado
@@ -118,6 +130,13 @@ $(document).ready(
 						$(v).attr('selected', true);
 					}
 				});
+
+				var button = $('#btn-update-db');
+				if ($('#tf_id').val() != null) {
+					button.val("Atualizar Estado");
+				} else if ($('#tf_id').val() == null) {
+					button.val("Inserir Estado");
+				}
 
 			}
 			;
@@ -133,15 +152,13 @@ $(document).ready(
 				$('#tf_id').val(null);
 				$('#tf_estado').val(null);
 				$('#tf_uf').val(null);
-				$('#slc_status').val(null);
+				$('#slc_status_update').val(0);
+				$('#btn-update-db').val("Inserir Estado");
 			}
 			;
 
 			// Pega Os Valores Dos Campos Input
-			function getInputData() {
-
-				var idEstado = $('#tf_id').val();
-				// alert(idEstado);
+			function getInputData(operacao) {
 
 				var nomeEstado = $('#tf_estado').val();
 				// alert(nomeEstado);
@@ -154,12 +171,22 @@ $(document).ready(
 						true).val();
 				// alert(statusEstado);
 
-				var estado = {
-					"idEstado" : idEstado,
-					"nomeEstado" : nomeEstado,
-					"siglaEstado" : siglaEstado,
-					"statusEstado" : statusEstado
-				};
+				if (operacao == "update") {
+					var idEstado = $('#tf_id').val();
+					
+					var estado = {
+						"idEstado" : idEstado,
+						"nomeEstado" : nomeEstado,
+						"siglaEstado" : siglaEstado,
+						"statusEstado" : statusEstado
+					};
+				} else if (operacao == "insert") {
+					var estado = {
+						"nomeEstado" : nomeEstado,
+						"siglaEstado" : siglaEstado,
+						"statusEstado" : statusEstado
+					};
+				}
 				// console.log(estado.idEstado);
 				return estado;
 			}
@@ -207,6 +234,39 @@ $(document).ready(
 							fillTable();
 						}
 					})
+				}
+
+			}
+
+			// Chama O Servlet De Inserção
+			function callInsertServlet(estado) {
+				$.ajax({
+					url : 'InserirEstadoServlet',
+					type : 'POST',
+					data : {
+						'nome-estado' : estado.nomeEstado,
+						'sigla-estado' : estado.siglaEstado,
+						'status-estado' : estado.statusEstado
+					},
+					success : function(response) {
+						alert("Estado Cadastrado Com Sucesso");
+						clearFields();
+						fillTable();
+					}
+				})
+			}
+
+			// verifica Qual Operação Será Necessária E Efetua
+			function doOperation() {
+				var inputId = $('#tf_id').val();
+
+				//Verifica Se O Campo InputID é Vazio
+				if (inputId == "") {
+					console.log("Insert Servlet Call");
+					callInsertServlet(getInputData("insert"));
+				} else if (inputId != "") {
+					console.log("Update Servlet Call");
+					callUpdateServlet(getInputData("update"));
 				}
 
 			}
