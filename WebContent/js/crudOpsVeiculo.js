@@ -79,7 +79,7 @@ $(document).ready(
 
 				})
 
-				// Preenche O Select Modeo
+				// Preenche O Select Modeço
 				getModelos();
 
 			}
@@ -110,6 +110,7 @@ $(document).ready(
 							+ value.descModelo + "</option>");
 					$('#slc_Modelo').append(opt);
 				})
+				$('select').formSelect();
 			}
 			;
 
