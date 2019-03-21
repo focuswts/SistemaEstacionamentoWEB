@@ -93,6 +93,8 @@ $(document).ready(
 				clearFields();
 				var row = "#" + $(this).parent().parent().attr('id');
 
+				console.log(row);
+				
 				var idMarca = $(row).find("td:eq(0)").text();
 
 				var descMarca = $(row).find("td:eq(1)").text();
@@ -120,16 +122,16 @@ $(document).ready(
 
 					// Efetua A Comparação Para Ver Se O Valor Da Table é igual
 					// Ao valor do OPTION
-					if ($(v).text().toLowerCase() === statusEstado
+					if ($(v).text().toLowerCase() === statusMarca
 							.toLowerCase()) {
 						$(v).attr('selected', true);
 					}
 				});
 
 				var button = $('#btn-operation');
-				if ($('#tf_Id').val() != null) {
+				if ($('#tf_Id').val() != "") {
 					button.val("Atualizar Marca");
-				} else if ($('#tf_Id').val() == null) {
+				} else if ($('#tf_Id').val() == "") {
 					button.val("Inserir Marca");
 				}
 
@@ -147,7 +149,7 @@ $(document).ready(
 				$('#tf_Id').val(null);
 				$('#tf_Descricao').val(null);
 				$('#slc_Status').val(0);
-				$('#btn-operation').val("Inserir Marca");
+				$('#btn-operation').val("Criar Marca");
 			}
 			;
 

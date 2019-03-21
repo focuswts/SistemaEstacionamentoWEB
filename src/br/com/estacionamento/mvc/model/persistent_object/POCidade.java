@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
 @Entity
@@ -39,7 +42,7 @@ public class POCidade {
 	private EnumStatus statusCidade;
 
 	@OneToOne
-	@JoinColumn(name = "TB_ESTADO_ID",nullable = false)
+	@JoinColumn(name = "TB_ESTADO_ID", nullable = false)
 	private POEstado idEstado;
 
 	public int getIdCidade() {
@@ -73,7 +76,16 @@ public class POCidade {
 	public void setStatusCidade(EnumStatus statusCidade) {
 		this.statusCidade = statusCidade;
 	}
-	
-	
+
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+
+		json.put("idCidade", this.idCidade);
+		json.put("nomeCidade", this.nomeCidade);
+		json.put("idEstado", this.idEstado.toJSON());
+		json.put("statusCidade", this.statusCidade.getStatus());
+
+		return json;
+	}
 
 }
