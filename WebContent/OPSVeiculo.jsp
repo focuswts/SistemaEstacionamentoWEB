@@ -20,6 +20,10 @@
 			</select>
 			
 				<select	id="slc_Cor">
+					<option value=0>Preto</option>
+				<option value=1>Branco</option>
+				<option value=2>Prata</option>
+				<option value=3>Vermelho</option>
 			</select>
 			
 			 <input	type="text" id="tf_Placa" placeholder="Placa" /> 
