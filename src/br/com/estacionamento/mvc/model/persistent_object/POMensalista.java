@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
 @Entity
@@ -70,6 +73,14 @@ public class POMensalista {
 		this.statusMensalista = statusMensalista;
 	}
 	
-	
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("idMensalista", this.idMensalista);
+		json.put("nomeMensalista", this.nomeMensalista);
+		json.put("cpfMensalista", this.cpfMensalista);
+		json.put("statusMensalista", this.statusMensalista.getStatus());
+
+		return json;
+	}
 	
 }

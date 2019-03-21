@@ -97,7 +97,7 @@ $(document).ready(
 
 				var descMarca = $(row).find("td:eq(1)").text();
 
-				var statusMarca = $(row).find("td:eq(3)").text();
+				var statusMarca = $(row).find("td:eq(2)").text();
 
 				console.log("Status: " + statusMarca);
 
@@ -113,7 +113,7 @@ $(document).ready(
 				// Acessa O Componente Filho Do Select(OPTION)
 				// roda a funcao para separar o valor(value) do conteudo do
 				// OPTION
-				$.each($('#slc_status').children(), function(k, v) {
+				$.each($('#slc_Status').children(), function(k, v) {
 					// Define O Valor Do Option Para False Para Depois Definir
 					// Um Valor Como TRUE
 					$(v).attr('selected', false);

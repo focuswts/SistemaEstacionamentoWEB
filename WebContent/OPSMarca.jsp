@@ -14,7 +14,7 @@
 
 	<div id="form">
 		<form method="POST">
-			<input type="text" disabled id="tf_Id" / placeholder="ID"> <input
+			<input type="text" disabled id="tf_Id" placeholder="ID"/> <input
 				type="text" id="tf_Descricao" placeholder="Login" /> 
 				<select	id="slc_Status">
 				<option value=0>Ativo</option>

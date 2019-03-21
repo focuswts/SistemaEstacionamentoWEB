@@ -17,12 +17,12 @@ public class Teste3 {
 
 			// estadoCrud.save(estado);
 
-			ArrayList<Object> estadoResult = estadoCrud.list("SELECT o FROM POEstado o WHERE o.idEstado = 1");
+			ArrayList<POEstado> estadoResult = estadoCrud.list("SELECT o FROM POEstado o WHERE o.idEstado = 1");
 
 			POEstado estado = (POEstado) estadoResult.get(0);
 			System.out.println(estado.getNomeEstado());
 //			POCidade cidade = new POCidade();
-//			cidade.setNomeCidade("Rolândia");
+//			cidade.setNomeCidade("Rolï¿½ndia");
 //			cidade.setIdEstado(estado);
 //			cidade.setStatusCidade(EnumStatus.ATIVO);
 //			System.out.println("Banco");
