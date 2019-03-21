@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumCor;
 import br.com.estacionamento.mvc.model.persistent_object.enums.EnumStatus;
 
@@ -39,13 +42,15 @@ public class POVeiculo {
 	@Column(name = "TB_VEICULO_COR", nullable = false)
 	private EnumCor corVeiculo;
 	
+	@ManyToOne
+	@JoinColumn(name = "TB_MODELO_ID",nullable = false)
+	private POModelo idModelo;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TB_VEICULO_STATUS", nullable = false)
 	private EnumStatus statusVeiculo;
 	
-	@ManyToOne
-	@JoinColumn(name = "TB_MODELO_ID",nullable = false)
-	private POModelo idModelo;
+	
 
 	public int getIdVeiculo() {
 		return idVeiculo;
@@ -87,6 +92,15 @@ public class POVeiculo {
 		this.idModelo = idModelo;
 	}
 
-	
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = new JSONObject();
+		json.put("idVeiculo", this.idVeiculo);
+		json.put("placaVeiculo", this.placaVeiculo);
+		json.put("corVeiculo",this.corVeiculo.getCor());
+		json.put("idModelo", this.idModelo.toJSON());
+		json.put("statusVeiculo", this.statusVeiculo.getStatus());
+
+		return json;
+	}
 	
 }

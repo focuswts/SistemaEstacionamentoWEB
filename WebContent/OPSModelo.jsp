@@ -14,29 +14,24 @@
 
 	<div id="form">
 		<form method="POST">
-			<input type="text" disabled id="tf_Id" / placeholder="ID"> <input
-				type="text" id="tf_Descricao" placeholder="Login" /> 
-				<select	id="slc_Status">
-				<option value=0>Ativo</option>
-				<option value=1>Inativo</option>
+			<input type="text" disabled id="tf_Id"  placeholder="ID"/>
+			
+			<select id="slc_Marca">
 			</select> 
 			
-			<select	id="slc_TipoVeiculo">
+				<select	id="slc_TipoVeiculo">
+			</select>
+			
+			 <input	type="text" id="tf_Descricao" placeholder="Modelo" /> 
+				
+			<select id="slc_Status">
 				<option value=0>Ativo</option>
 				<option value=1>Inativo</option>
-			</select> 
-			
-			<select	id="slc_Marca">
-				<option value=0>Ativo</option>
-				<option value=1>Inativo</option>
-			</select> 
-			
-			<input type="button" value="Criar Modelo" id="btn-operation" /> <input
+			</select>
+			 <input type="button" value="Criar Modelo" id="btn-operation" /> <input
 				type="button" value="Limpar Campos" id="btn-clear" />
 		</form>
 	</div>
-
-
 
 
 </body>

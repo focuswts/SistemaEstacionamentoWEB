@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Operações Cidades</title>
+<title>Operações Veículos</title>
 <script src="js/jquery-3.3.1.js"></script>
-
+<script src="js/crudOpsVeiculo.js"></script>
 </head>
 <body>
 
@@ -14,18 +14,24 @@
 
 	<div id="form">
 		<form method="POST">
-			<input type="text" disabled id="tf_Id" placeholder="ID" /> <input
-				type="text" id="tf_Descricao" placeholder="Login" /> <select
-				id="slc_Estado">
-			</select> <select id="slc_Status">
+			<input type="text" disabled id="tf_Id"  placeholder="ID"/>
+			
+				<select	id="slc_Modelo">
+			</select>
+			
+				<select	id="slc_Cor">
+			</select>
+			
+			 <input	type="text" id="tf_Placa" placeholder="Placa" /> 
+				
+			<select id="slc_Status">
 				<option value=0>Ativo</option>
 				<option value=1>Inativo</option>
-			</select> <input type="button" value="Criar Cidade" id="btn-operation" /> <input
+			</select>
+			 <input type="button" value="Criar Modelo" id="btn-operation" /> <input
 				type="button" value="Limpar Campos" id="btn-clear" />
 		</form>
 	</div>
-
-
 
 
 </body>

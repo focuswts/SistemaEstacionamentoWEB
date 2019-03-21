@@ -2,10 +2,10 @@ package br.com.estacionamento.mvc.model.persistent_object.enums;
 
 public enum EnumCor {
 
-	PRETO("preto"),
-	BRANCO("branco"),
-	PRATA("prata"),
-	VERMELHO("vermelho");
+	PRETO("PRETO"),
+	BRANCO("BRANCO"),
+	PRATA("PRATA"),
+	VERMELHO("VERMELHO");
 	
 	private String cor;
 	

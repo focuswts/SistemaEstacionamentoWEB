@@ -85,7 +85,7 @@ $(document).ready(
 									$('#set').append('</tbody></table>');
 									// Preenche O Select Estado
 									getEstados();
-
+								
 								})
 
 			}
@@ -113,7 +113,6 @@ $(document).ready(
 							+ value.siglaEstado + "</option>");
 					$('#slc_Estado').append(opt);
 				})
-
 			}
 			;
 
@@ -168,16 +167,17 @@ $(document).ready(
 							// Um Valor Como TRUE
 							$(v).attr('selected', false);
 
-
 							// Efetua A Comparação Para Ver Se O Valor Da Table
 							// é igual
 							// Ao valor do OPTION
-							console.log("VText: " + $(v).text().toLowerCase() + " Sigla: " + siglaEstado.toLowerCase());
+							console.log("VText: " + $(v).text().toLowerCase()
+									+ " Sigla: " + siglaEstado.toLowerCase());
 							console.log($(v));
-							if ($(v).text().toLowerCase() === siglaEstado.toLowerCase()) {
-								
+							if ($(v).text().toLowerCase() === siglaEstado
+									.toLowerCase()) {
+
 								$(v).attr('selected', true);
-								
+
 							}
 						});
 

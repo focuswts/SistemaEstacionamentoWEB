@@ -37,10 +37,6 @@ public class POModelo {
 	@Column(name = "TB_MODELO_DESC", nullable = false, length = 50)
 	private String descModelo;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TB_MODELO_STATUS", nullable = false)
-	private EnumStatus statusModelo;
-
 	@ManyToOne
 	@JoinColumn(name = "TB_TIPO_VEICULO_ID", nullable = false)
 	private POTipoVeiculo idTipoV;
@@ -48,6 +44,10 @@ public class POModelo {
 	@ManyToOne
 	@JoinColumn(name = "TB_MARCA_ID", nullable = false)
 	private POMarca idMarca;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "TB_MODELO_STATUS", nullable = false)
+	private EnumStatus statusModelo;
 
 	public int getIdModelo() {
 		return idModelo;
@@ -93,9 +93,9 @@ public class POModelo {
 		JSONObject json = new JSONObject();
 		json.put("idModelo", this.idModelo);
 		json.put("descModelo", this.descModelo);
+		json.put("idTipoV", this.idTipoV.toJSON());
+		json.put("idMarca", this.idMarca.toJSON());
 		json.put("statusModelo", this.statusModelo.getStatus());
-		json.put("idTipoV", this.idTipoV);
-		json.put("idMarca", this.idMarca);
 
 		return json;
 	}
