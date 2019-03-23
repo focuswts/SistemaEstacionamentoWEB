@@ -67,9 +67,12 @@ public class CRUDUsuario extends AbstractCRUD {
 
 			ArrayList<POUsuario> set = (ArrayList<POUsuario>) query.getResultList();
 			super.close();
-			if (set.size() > 0) {
-				loginSuccess = true;
+			System.out.println("Aqui1");
+			if (!set.isEmpty()) {
+				System.out.println("Login C");
+				return	loginSuccess = true;
 			} else {
+				System.out.println("Teste");
 				loginSuccess = false;
 			}
 

@@ -84,7 +84,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			response.getWriter().write(arr.toString());
 
 		} catch (Exception e) {
-			System.out.println("Erro Pegar Lista Usuários");
+			System.out.println("Erro Pegar Lista Usuï¿½rios");
 			e.printStackTrace();
 		}
 		return arr;
@@ -99,7 +99,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			POUsuario usuario = new POUsuario();
 			CRUDUsuario crud = new CRUDUsuario();
 
-			// Definição De Dados Para O OBJ Usuario
+			// Definiï¿½ï¿½o De Dados Para O OBJ Usuario
 			usuario.setNomeUsuario(nomeUsuario);
 			usuario.setSenhaUsuario(senhaUsuario);
 
@@ -115,13 +115,13 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			crud.insert(usuario);
 
 			if (usuario.getIdUsuario() > 0) {
-				System.out.println("Usuário Inserido Com Sucesso!");
+				System.out.println("Usuï¿½rio Inserido Com Sucesso!");
 			} else {
-				System.out.println("Erro Ao Inserir O Usuário");
+				System.out.println("Erro Ao Inserir O Usuï¿½rio");
 			}
 
 		} catch (Exception e) {
-			System.out.println("Erro Ao Inserir Usuário");
+			System.out.println("Erro Ao Inserir Usuï¿½rio");
 			e.printStackTrace();
 		}
 
@@ -136,7 +136,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			POUsuario usuario = new POUsuario();
 			CRUDUsuario crud = new CRUDUsuario();
 
-			// Definição De Dados Para O OBJ Usuario
+			// Definiï¿½ï¿½o De Dados Para O OBJ Usuario
 			usuario.setIdUsuario(idUsuario);
 			usuario.setNomeUsuario(nomeUsuario);
 			usuario.setSenhaUsuario(senhaUsuario);
@@ -153,13 +153,13 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			crud.update(usuario);
 
 			if (usuario.getIdUsuario() > 0) {
-				System.out.println("Usuário Atualizado Com Sucesso!");
+				System.out.println("Usuï¿½rio Atualizado Com Sucesso!");
 			} else {
-				System.out.println("Erro Ao Atualizar O Usuário");
+				System.out.println("Erro Ao Atualizar O Usuï¿½rio");
 			}
 
 		} catch (Exception e) {
-			System.out.println("Erro Ao Atualizar Usuário");
+			System.out.println("Erro Ao Atualizar Usuï¿½rio");
 			e.printStackTrace();
 		}
 
@@ -175,9 +175,9 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			usuario.setIdUsuario(idUsuario);
 
 			crud.delete(usuario);
-			System.out.println("Usuário Removido Com Sucesso");
+			System.out.println("Usuï¿½rio Removido Com Sucesso");
 		} catch (Exception e) {
-			System.out.println("Erro Ao Remover Usuário");
+			System.out.println("Erro Ao Remover Usuï¿½rio");
 			e.printStackTrace();
 		}
 
@@ -198,6 +198,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			String message = "";
 
+			
 			if (crud.login(usuario) == true) {
 				System.out.println("Login Efetuado!");
 				message = "Login Efetuado!";
@@ -213,7 +214,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Erro Ao Efetuar Autenticação Do Usuário");
+			System.out.println("Erro Ao Efetuar Autenticaï¿½ï¿½o Do Usuï¿½rio");
 			e.printStackTrace();
 		}
 

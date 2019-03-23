@@ -2,7 +2,14 @@ $(document).ready(function() {
 
 	// Pega O Evento Click Do Botao
 	$('#btn-login').click(function() {
-		login(getInputData());
+	
+		if(checkInputs() == true){
+			login(getInputData());	
+		}else{
+			alert("Preencha Todos Os Campos");
+		}
+	
+	
 	});
 
 	function getInputData() {
@@ -17,7 +24,6 @@ $(document).ready(function() {
 	}
 
 	function login(usuario) {
-
 		$.ajax({
 			url : 'CRUDUsuarioServlet',
 			data : {
@@ -30,9 +36,28 @@ $(document).ready(function() {
 				// alert(JSON.stringify(response));
 				alert(response);
 
-			},
+			}
+			
 		})
 
 	}
 
+
+	//VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
+	function checkInputs() {
+		var isValid = true;
+		$('input').filter('[required]').each(function() {
+			if ($(this).val() === '') {
+				isValid = false;
+				return false;
+			}
+		});
+		if (isValid) {
+			$('#confirm').prop('disabled', false)
+		}
+		return isValid;
+	}
+
+	
+	
 });
