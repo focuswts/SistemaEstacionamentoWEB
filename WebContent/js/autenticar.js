@@ -2,14 +2,13 @@ $(document).ready(function() {
 
 	// Pega O Evento Click Do Botao
 	$('#btn-login').click(function() {
-	
-		if(checkInputs() == true){
-			login(getInputData());	
-		}else{
+
+		if (checkInputs() == true) {
+			login(getInputData());
+		} else {
 			alert("Preencha Todos Os Campos");
 		}
-	
-	
+
 	});
 
 	function getInputData() {
@@ -34,16 +33,16 @@ $(document).ready(function() {
 			type : 'POST',
 			success : function(response) {
 				// alert(JSON.stringify(response));
-				alert(response);
+				alert(response.message);
+				window.location = response.url;
 
 			}
-			
+
 		})
 
 	}
 
-
-	//VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
+	// VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
 	function checkInputs() {
 		var isValid = true;
 		$('input').filter('[required]').each(function() {
@@ -58,6 +57,4 @@ $(document).ready(function() {
 		return isValid;
 	}
 
-	
-	
 });

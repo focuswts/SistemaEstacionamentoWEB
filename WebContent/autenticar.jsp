@@ -14,7 +14,6 @@
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-</head>
 
 
 <!-- Compiled and minified CSS -->

@@ -6,9 +6,12 @@
 <meta charset="UTF-8">
 <title>Operações Mensalistas</title>
 <script src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src='js/importAssistant.js'></script>
 <script src="js/CRUDOpsMensalista.js"></script>
 </head>
 <body>
+
+<div id="divMenu"></div>
 
 	<div id="tableDiv"></div>
 

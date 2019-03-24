@@ -38,8 +38,7 @@ $(document)
 						$('#tabela').append(
 								$('<tbody></tbody>').attr("id", "tabelaBody"));
 
-						$
-								.each(
+						$.each(
 										data,
 										function(index, value) {
 

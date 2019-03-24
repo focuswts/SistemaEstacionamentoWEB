@@ -175,7 +175,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			usuario.setIdUsuario(idUsuario);
 
 			crud.delete(usuario);
-			System.out.println("Usu�rio Removido Com Sucesso");
+			System.out.println("Usuário Removido Com Sucesso");
 		} catch (Exception e) {
 			System.out.println("Erro Ao Remover Usu�rio");
 			e.printStackTrace();
@@ -187,6 +187,9 @@ public class CRUDUsuarioServlet extends HttpServlet {
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 
+		// Cria json para o retorno para o js
+		JSONObject json = new JSONObject();
+
 		try {
 			POUsuario usuario = new POUsuario();
 			CRUDUsuario crud = new CRUDUsuario();
@@ -194,27 +197,31 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			usuario.setNomeUsuario(username);
 			usuario.setSenhaUsuario(password);
 
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
 			String message = "";
 
-			
 			if (crud.login(usuario) == true) {
 				System.out.println("Login Efetuado!");
 				message = "Login Efetuado!";
-				response.getWriter().write(message);
-				// response.getWriter().write("Login Efetuado Com Sucesso");
+
+				String urlPath = request.getContextPath();
+				System.out.println("Content URL: " + urlPath);
+				String url = urlPath + "/menu.jsp";
+
+				json.put("message", message);
+				json.put("url", url);
+				response.getWriter().write(json.toString());
 				// response.sendRedirect(request.getContextPath() + "/sucesso.jsp");
 			} else if (crud.login(usuario) == false) {
 				System.out.println("Login E/Ou Senha Incorretos!");
 				message = "Login E/Ou Senha Incorretos!";
-				response.getWriter().write(message);
-//				response.getWriter().write("Login E/Ou Senha Incorretos!");
-				// response.sendRedirect(request.getContextPath() + "/erro.jsp");
+				json.put("message", message);
+
+				response.getWriter().write(json.toString());
 			}
 
 		} catch (Exception e) {
-			System.out.println("Erro Ao Efetuar Autentica��o Do Usu�rio");
+			System.out.println("Erro Ao Efetuar Autenticação Do Usuário");
 			e.printStackTrace();
 		}
 

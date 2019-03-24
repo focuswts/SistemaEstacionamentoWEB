@@ -15,7 +15,7 @@
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-</head>
+
 
 <script src="js/crudOpsVeiculo.js"></script>
 <!-- Compiled and minified CSS -->
@@ -23,7 +23,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
 <link rel="stylesheet" href="css/styleVeiculo.css" />
-
+</head>
 <body>
 	<div class="row container center-align">
 		<div>
@@ -96,9 +96,8 @@
 
 					<div class="input-field col s4 m4 l4 push-s2 push-m2 push-l2">
 						<div class="push-s2 push-m2 push-l2">
-							<label for="tf_Placa">Placa</label> 
-							<input type="text"
-								id="tf_Placa" class="txtMiddle validate" required/>
+							<label for="tf_Placa">Placa</label> <input type="text"
+								id="tf_Placa" class="txtMiddle validate" required />
 						</div>
 
 
@@ -128,17 +127,17 @@
 				<div class="input-field">
 					<button class="waves-effect waves-light btn" type="submit"
 						id="btn-operation">
-						<i class="material-icons left">add_circle_outline</i>
-						<span id="btn-operation-span" class="right">Adicionar Veículo</span>
+						<i class="material-icons left">add_circle_outline</i> <span
+							id="btn-operation-span" class="right">Adicionar Veículo</span>
 					</button>
 				</div>
 
 				<div class="input-field">
 					<button id="btn-clear" class="waves-effect waves-light btn"
-						type="submit"> 
-						<i class="material-icons left">clear_all</i>
-						<span class="right">Limpar Campos</span>
-						</button>
+						type="submit">
+						<i class="material-icons left">clear_all</i> <span class="right">Limpar
+							Campos</span>
+					</button>
 				</div>
 
 
