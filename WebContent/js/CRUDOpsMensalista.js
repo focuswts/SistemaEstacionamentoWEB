@@ -35,9 +35,7 @@ $(document)
 						$('#tabela').append(
 								$('<tbody></tbody>').attr("id", "tabelaBody"));
 
-						$.each(
-										data,
-										function(index, value) {
+						$.each(data,function(index, value) {
 
 											var td = $("<tr id= 'row" + index
 													+ "'>" + "</tr>");

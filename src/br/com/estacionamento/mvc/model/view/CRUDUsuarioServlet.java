@@ -2,13 +2,13 @@ package br.com.estacionamento.mvc.model.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,6 +60,17 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			System.out.println("CRUD Authentication Operation");
 			loginAuthentication(request, response);
 			break;
+
+		case "checkLogin":
+			System.out.println("CRUD Check Login Operation");
+			checkSession(request, response);
+			break;
+
+		case "logout":
+			System.out.println("CRUD Logout Operation");
+			logout(request);
+			break;
+
 		}
 
 	}
@@ -99,7 +110,7 @@ public class CRUDUsuarioServlet extends HttpServlet {
 			POUsuario usuario = new POUsuario();
 			CRUDUsuario crud = new CRUDUsuario();
 
-			// Definiï¿½ï¿½o De Dados Para O OBJ Usuario
+			// Definição De Dados Para O OBJ Usuario
 			usuario.setNomeUsuario(nomeUsuario);
 			usuario.setSenhaUsuario(senhaUsuario);
 
@@ -199,29 +210,66 @@ public class CRUDUsuarioServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			String message = "";
+			String urlPath = request.getContextPath();
 
 			if (crud.login(usuario) == true) {
 				System.out.println("Login Efetuado!");
 				message = "Login Efetuado!";
 
-				String urlPath = request.getContextPath();
 				System.out.println("Content URL: " + urlPath);
 				String url = urlPath + "/menu.jsp";
 
 				json.put("message", message);
 				json.put("url", url);
+
+				// Define Os Valores Na Sessão
+				HttpSession session = request.getSession();
+				session.setMaxInactiveInterval(10 * 60);
+
+				session.setAttribute("user", username);
+
 				response.getWriter().write(json.toString());
-				// response.sendRedirect(request.getContextPath() + "/sucesso.jsp");
+
 			} else if (crud.login(usuario) == false) {
 				System.out.println("Login E/Ou Senha Incorretos!");
 				message = "Login E/Ou Senha Incorretos!";
+				String url = urlPath + "/autenticar.jsp";
 				json.put("message", message);
+				json.put("url", url);
 
 				response.getWriter().write(json.toString());
 			}
 
 		} catch (Exception e) {
 			System.out.println("Erro Ao Efetuar AutenticaÃ§Ã£o Do UsuÃ¡rio");
+			e.printStackTrace();
+		}
+
+	}
+
+	private boolean checkSession(HttpServletRequest request, HttpServletResponse response) {
+		boolean logged = false;
+		if (request.getSession().getAttribute("user") != null) {
+			String username = request.getSession().getAttribute("user").toString();
+			logged = true;
+			try {
+				response.getWriter().write(username);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (request.getSession().getAttribute("user") == null) {
+			logged = false;
+		}
+
+		return logged;
+	}
+
+	private void logout(HttpServletRequest request) {
+		try {
+			request.getSession().invalidate();
+
+		} catch (Exception e) {
+			System.out.println("Erro Ao Efetuar Logout");
 			e.printStackTrace();
 		}
 

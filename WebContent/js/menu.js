@@ -1,19 +1,25 @@
 $(document).ready(function() {
 
-	importDependencies();
 	renderNavbar();
 
-	$('dropdownUser').ready(function() {
-		$('.dropdown-trigger').dropdown();
-	});
+});
 
+$('#dropdownUser').on("click", function(e) {
+	e.preventDefault();
+	console.log("loaded Component");
+	$('.dropdown-trigger').dropdown();
+});
+
+$('.dropdown-trigger').ready(function() {
+	console.log("loaded Component");
+	$('.dropdown-trigger').dropdown();
 });
 
 // Faz A Importao Dos Plugins Necessários
 function importDependencies() {
 	var head = $('head');
 
-	var materializeJs = "<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>";
+	var materializeJs = "<script src='https://cdnjs.cloudflare.coms/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>";
 
 	var materializeCss = "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'/>";
 
@@ -24,6 +30,26 @@ function importDependencies() {
 	// head.append(materializeJs);
 
 };
+
+function checkSession() {
+	$.ajax({
+		url : 'CRUDUsuarioServlet',
+		data : {
+			'operation' : "authentication",
+			'user' : usuario.user,
+			'password' : usuario.password
+		},
+		type : 'POST',
+		success : function(response) {
+			// alert(JSON.stringify(response));
+			alert(response.message);
+			window.location = response.url;
+
+		}
+
+	})
+
+}
 
 // Estrutura o escopo da navbar
 function renderNavbar() {
@@ -42,7 +68,7 @@ function renderNavbar() {
 	var ulTabelaPreco = "<li><a href='OPSTabelaPreco.jsp'>Tabelas De Preco</a></li>";
 
 	// Botao Para Mostrar Dropdown
-	var dropdownTrigger = "<li><a id='dropTrigger' class='btn dropdown-trigger' href='#' data-target='dropdownUser'><i class='material-icons'>person</i></a></li>";
+	var dropdownTrigger = "<li><a id='dropTrigger' class='btn dropdown-trigger' data-target='dropdownUser'><i class='material-icons'>person</i></a></li>";
 
 	var userDropdown = "<ul id='dropdownUser' class='dropdown-content'></ul>";
 
@@ -65,5 +91,6 @@ function renderNavbar() {
 	$('#nav-mobile').append(ulEstadia);
 	$('#nav-mobile').append(ulTabelaPreco);
 	$('#nav-mobile').append(dropdownTrigger);
+
 };
 

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Operações Cidades</title>
 <script src="js/jquery-3.3.1.js"></script>
+<script src="js/crudOpsCidade.js"></script>
 
 </head>
 <body>

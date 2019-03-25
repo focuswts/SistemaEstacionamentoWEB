@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	
 	// Pega O Evento Click Do Botao
 	$('#btn-login').click(function() {
 
@@ -23,6 +24,26 @@ $(document).ready(function() {
 	}
 
 	function login(usuario) {
+		$.ajax({
+			url : 'CRUDUsuarioServlet',
+			data : {
+				'operation' : "authentication",
+				'user' : usuario.user,
+				'password' : usuario.password
+			},
+			type : 'POST',
+			success : function(response) {
+				// alert(JSON.stringify(response));
+				alert(response.message);
+				window.location = response.url;
+
+			}
+
+		})
+
+	}
+	
+	function checkLogin(usuario) {
 		$.ajax({
 			url : 'CRUDUsuarioServlet',
 			data : {

@@ -3,6 +3,7 @@ $(document).ready(function() {
 	importDependencies();
 });
 
+
 // Faz A Importao Dos Plugins Necessários
 function importDependencies() {
 
@@ -21,4 +22,6 @@ function importDependencies() {
 	head.append(materializeIcons);
 	head.append(menu);
 
+	
+	
 };
