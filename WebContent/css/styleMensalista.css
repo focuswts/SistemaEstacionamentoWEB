@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.txtMiddle {
+	text-align-last: center;
+}
+
+.input-field [type=text] {
+	color: black;
+}
